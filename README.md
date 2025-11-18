@@ -1,57 +1,67 @@
-🌐 KeniLand – Day-1 Backend Test (InfiniGods)
-Procedural Land Generator + Blockchain-Integrated Metadata API
+# 🌐 KeniLand – Procedural Land Generator + Blockchain Metadata API
 
-🚀 Built with love, speed, and clean Web3 architecture.
+### 🏔️ A lightweight Web3-ready backend that generates procedural land traits, hashes metadata, and signs it for secure on-chain usage.
 
-📌 Overview
+---
 
-This is my Day-1 backend submission for the InfiniGods technical test.
+## ⚡ Overview
 
-The goal of this project:
+**KeniLand** is a backend API designed for Web3 games that need:
 
-Create a new backend API that integrates with blockchain smart contracts and returns console-visible results.
+- Procedurally generated land attributes  
+- Signed metadata for secure reveal / lazy minting  
+- Blockchain-connected endpoints  
+- A clean, modular API structure  
 
-I extended this slightly to showcase a game-ready workflow, while still keeping everything simple.
+The system is intentionally simple, fast, and production-inspired.
 
-✨ What this API does
+---
 
-When you call:
+## ✨ Features
 
+### 🧬 Procedural Land Generation  
+Each land ID produces unique but deterministic traits such as:  
+- biome  
+- rarity  
+- power score  
+
+This mimics real game asset generation logic.
+
+---
+
+### 🔗 Blockchain-Integrated Metadata Hash  
+Every land object is converted into a hash using keccak256.  
+This ensures data integrity and allows smart contracts to verify metadata.
+
+---
+
+### 🔐 Backend Signature (Web3 WOW Factor)  
+The backend wallet signs the `metadataHash` using `signMessage(arrayify(metadataHash))`.
+
+This enables advanced features like:  
+- Lazy minting  
+- Server-verified claims  
+- Off-chain metadata reveal with on-chain validation
+
+---
+
+### 🧱 ERC-721 Compatibility (Optional)  
+Set `EXAMPLE_ERC721` in `.env` to fetch:  
+- `ownerOf(tokenId)`  
+- `tokenURI(tokenId)`
+
+---
+
+## 🧪 API Example
+
+### Endpoint
 GET /api/keni/land/:id
 
+csharp
+Copy code
 
-It generates:
-
-✔ Procedural game traits
-
-Based on the land ID — similar to how real Web3 games generate rarity.
-
-✔ Blockchain-integrated metadataHash
-
-Generated using:
-
-keccak256(metadataJSON)
-
-✔ Backend signature (WOW factor)
-
-The metadataHash is signed by a backend wallet using:
-
-signMessage(arrayify(metadataHash))
-
-
-This can be used for:
-
-Lazy minting
-
-Secure reveal
-
-Server-verified assets
-
-✔ Optional: Reads from any ERC-721 contract
-
-If you set EXAMPLE_ERC721 in .env.
-
-🧪 Example API Output
+### Example Output
+```json
 {
   "metadata": {
     "landId": 42,
@@ -62,7 +72,7 @@ If you set EXAMPLE_ERC721 in .env.
     },
     "tokenURI": null,
     "generatedAt": "2025-11-18T04:17:45.664Z",
-    "game": "KeniLand-Day1"
+    "game": "KeniLand"
   },
   "metadataHash": "0x99287d88bbb49c956fe62edf8dac085e4e24c6229f63f221578fb35c9a50b3e0",
   "signature": "0x182a65929fabe...",
@@ -70,70 +80,3 @@ If you set EXAMPLE_ERC721 in .env.
 }
 
 
-Clean. Useful. Game-ready.
-
-🗂 Project Structure
-infinigods-test/
-│
-└── backend/
-    ├── server.js
-    ├── .env
-    ├── package.json
-    └── routes/
-        └── KeniApiTest.js
-
-
-Simple, clear, and exactly what was needed.
-
-⚙️ Setup Instructions
-1️⃣ Install dependencies
-cd backend
-npm install
-
-2️⃣ Create .env file
-RPC_URL=https://rpc.ankr.com/eth_sepolia
-BACKEND_PK=0xYOUR_TEST_PRIVATE_KEY   # empty wallet for signing only
-EXAMPLE_ERC721=                      # leave blank (optional)
-PORT=3000
-
-3️⃣ Start the server
-npm start
-
-4️⃣ Test the API
-
-Open in browser:
-
-http://localhost:3000/api/keni/land/42
-
-🎮 Why This Fits InfiniGods
-
-InfiniGods deals with:
-
-Web3 game logic
-
-Dynamic assets
-
-Server-assisted metadata
-
-Secure reveal systems
-
-Smart contract-linked gameplay
-
-This Day-1 backend showcases:
-
-⭐ Procedural generation
-⭐ Hash-verified metadata
-⭐ Signed output for on-chain minting
-⭐ Clean and scalable code
-⭐ Exactly what a Web3 game backend does
-🎥 Video Demo (to be attached)
-
-Demonstrates:
-
-Running the backend
-
-Calling the /land/:id endpoint
-
-Viewing traits, hash, and signature
-
-Clean console & JSON output
